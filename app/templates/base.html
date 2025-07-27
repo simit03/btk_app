@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--Title-->
+    <title>{% block title %}Proje Adı{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+    <!--CSS-->
+    <!---Plugins-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/bootstrap-grid.css') }}">
+    <!---Base-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <!---Components-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/footer.css') }}">
+    <!---Extra Styles-->
+    {% block head_extra_styles %}{% endblock %}
+</head>
+<body>
+
+    <!--Navbar-->
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">MarkaLogosu</a>
+            <nav class="navbar-nav">
+                <a href="/" class="nav-link active">Ana Sayfa</a>
+                <a href="/login" class="nav-button">Giriş Yap</a>
+            </nav>
+        </div>
+    </header>
+    <!--Main Content-->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!--Footer-->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2024 Proje Adı. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!--Scripts-->
+    <!---Plugins-->
+    <script src="{{ url_for('static', filename='js/plugins/gsap-core.js') }}"></script>
+    <!---Main-->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!---Components-->
+    {% block body_extra_scripts %}{% endblock %}
+</body>
+</html>
