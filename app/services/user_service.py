@@ -24,6 +24,8 @@
 # =============================================================================
 from app.database.user_repository import UserRepository # Önceki adımdan UserRepository
 from typing import Dict, Any, List, Tuple, Optional
+from app.database.user_repository import add_student, get_student_by_username
+from werkzeug.security import check_password_hash
 
 # =============================================================================
 # 4.0. USERSERVICE SINIFI
@@ -104,3 +106,26 @@ class UserService:
         except Exception as e:
             print(f"Error in create_new_user service: {e}")
             return False, {'message': 'An unexpected error occurred'}
+
+def register_student_service(first_name, last_name, username, password, grade):
+    if not all([first_name, last_name, username, password, grade]):
+        return False, 'Tüm alanları doldurun.'
+    if get_student_by_username(username):
+        return False, 'Bu kullanıcı adı zaten alınmış.'
+    add_student(first_name, last_name, username, password, grade)
+    return True, 'Kayıt başarılı.'
+
+def login_student_service(username, password):
+    student = get_student_by_username(username)
+    if not student or not check_password_hash(student['password'], password):
+        return False, None
+    return True, {
+        'username': student['username'],
+        'first_name': student['first_name'],
+        'last_name': student['last_name'],
+        'grade': student['grade']
+    }
+
+def update_student_profile_service(username, first_name, last_name, password, grade=None):
+    from app.database.user_repository import update_student_profile
+    return update_student_profile(username, first_name, last_name, password, grade)

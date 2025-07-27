@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Bilgilerimi Düzenle{% endblock %}
+
+{% block head_extra_styles %}
+    <link rel="stylesheet" href="/static/css/profile_edit.css">
+{% endblock %}
+
+{% block content %}
+<div class="container profile-edit-container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12 col-12">
+            <div class="profile-edit-card shadow rounded-4 border-0 p-5">
+                <div class="card-body">
+                    <h2 class="profile-title text-center mb-4">Bilgilerimi Düzenle</h2>
+                    <p class="profile-subtitle text-center mb-5">Kişisel bilgilerini güncelleyebilirsin</p>
+                    <form method="POST" id="profile-edit-form" autocomplete="off">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12 mb-4">
+                                <h4 class="section-title mb-3">Kişisel Bilgiler</h4>
+                                <div class="mb-4">
+                                    <label for="edit-firstname" class="form-label">Ad</label>
+                                    <input type="text" id="edit-firstname" name="edit-firstname" class="form-control form-control-lg rounded-3" value="{{ first_name }}" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="edit-lastname" class="form-label">Soyad</label>
+                                    <input type="text" id="edit-lastname" name="edit-lastname" class="form-control form-control-lg rounded-3" value="{{ last_name }}" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="edit-grade" class="form-label">Sınıf</label>
+                                    <select id="edit-grade" name="edit-grade" class="form-select form-select-lg rounded-3" required>
+                                        <option value="1" {% if session.get('grade') == 1 %}selected{% endif %}>1. Sınıf</option>
+                                        <option value="2" {% if session.get('grade') == 2 %}selected{% endif %}>2. Sınıf</option>
+                                        <option value="3" {% if session.get('grade') == 3 %}selected{% endif %}>3. Sınıf</option>
+                                        <option value="4" {% if session.get('grade') == 4 %}selected{% endif %}>4. Sınıf</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12 mb-4">
+                                <h4 class="section-title mb-3">Güvenlik</h4>
+                                <div class="mb-4">
+                                    <label for="edit-password" class="form-label">Yeni Şifre (isteğe bağlı)</label>
+                                    <input type="password" id="edit-password" name="edit-password" class="form-control form-control-lg rounded-3" placeholder="Yeni şifre bırak boşsa değişmez">
+                                </div>
+                                <div class="password-info">
+                                    <p class="text-muted small">Şifreni değiştirmek istemiyorsan bu alanı boş bırakabilirsin.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-gradient profile-edit-btn py-3 px-5">Kaydet</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_extra_scripts %}
+    <script src="/static/js/profile_edit.js"></script>
+{% endblock %} 

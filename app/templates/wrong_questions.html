@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Yanlış Yaptığım Sorular{% endblock %}
+
+{% block head_extra_styles %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mt-4">
+            <h2 class="profile-title">❌ Yanlış Yaptığım Sorular</h2>
+            <p class="profile-subtitle">Yanlış cevapladığın soruların listesi</p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8 col-12 mb-4">
+            <div class="profile-card">
+                <table class="profile-table">
+                    <thead>
+                        <tr><th>Soru</th><th>Verdiğin Cevap</th><th>Doğru Cevap</th><th>Tarih</th><th></th></tr>
+                    </thead>
+                    <tbody id="wrong-questions-table">
+                        <!-- JS ile doldurulacak -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4 col-12 mb-4">
+            <div class="profile-card" id="question-detail-box" style="min-height:200px;">
+                <h4 class="mb-3">Soru Detayı</h4>
+                <div id="question-detail-content" class="text-muted">Bir soruya tıklayarak detayını görebilirsin.</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_extra_scripts %}
+    <script src="/static/js/wrong_questions.js"></script>
+{% endblock %} 

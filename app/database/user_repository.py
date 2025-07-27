@@ -30,6 +30,8 @@
 from mysql.connector import Error as MySQLError
 from typing import Optional, Dict, List
 from app.database.db_connection import DatabaseConnection
+import sqlite3
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # =============================================================================
 # 4.0. USERREPOSITORY SINIFI
@@ -155,3 +157,70 @@ class UserRepository:
             return []
         finally:
             self._close_if_owned()
+
+# Öğrenci ekle
+
+def add_student(first_name, last_name, username, password, grade):
+    db = DatabaseConnection()
+    try:
+        with db as conn:
+            hashed_pw = generate_password_hash(password)
+            query = """
+                INSERT INTO students (first_name, last_name, username, password, grade)
+                VALUES (%s, %s, %s, %s, %s)
+            """
+            conn.cursor.execute(query, (first_name, last_name, username, hashed_pw, grade))
+            conn.connection.commit()
+    finally:
+        db.close()
+
+# Kullanıcı adı ile öğrenci bul
+
+def get_student_by_username(username):
+    db = DatabaseConnection()
+    try:
+        with db as conn:
+            query = "SELECT * FROM students WHERE username = %s"
+            conn.cursor.execute(query, (username,))
+            return conn.cursor.fetchone()
+    finally:
+        db.close()
+
+# Öğrenci cevaplarını kaydet (eğer tablo varsa, yoksa fonksiyon boş kalsın)
+def add_student_answer(student_id, question_id, is_correct, answer):
+    db = DatabaseConnection()
+    try:
+        with db as conn:
+            query = """
+                INSERT INTO student_answers (student_id, question_id, is_correct, answer)
+                VALUES (%s, %s, %s, %s)
+            """
+            conn.cursor.execute(query, (student_id, question_id, is_correct, answer))
+            conn.connection.commit()
+    finally:
+        db.close()
+
+def update_student_profile(username, first_name, last_name, password):
+    db = DatabaseConnection()
+    try:
+        with db as conn:
+            if password:
+                hashed_pw = generate_password_hash(password)
+                query = """
+                    UPDATE students SET first_name=%s, last_name=%s, password=%s WHERE username=%s
+                """
+                conn.cursor.execute(query, (first_name, last_name, hashed_pw, username))
+            else:
+                query = """
+                    UPDATE students SET first_name=%s, last_name=%s WHERE username=%s
+                """
+                conn.cursor.execute(query, (first_name, last_name, username))
+            conn.connection.commit()
+            if conn.cursor.rowcount > 0:
+                return True, 'Profil başarıyla güncellendi.'
+            else:
+                return False, 'Güncellenecek kullanıcı bulunamadı.'
+    except Exception as e:
+        return False, f'Hata: {e}'
+    finally:
+        db.close()

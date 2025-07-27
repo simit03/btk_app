@@ -1,0 +1,114 @@
+@keyframes colorShift {
+  0% {
+    background-color: #667eea;
+  }
+  16.66% {
+    background-color: #f093fb;
+  }
+  33.33% {
+    background-color: #4facfe;
+  }
+  50% {
+    background-color: #43e97b;
+  }
+  66.66% {
+    background-color: #38f9d7;
+  }
+  83.33% {
+    background-color: #764ba2;
+  }
+  100% {
+    background-color: #667eea;
+  }
+}
+
+.profile-edit-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: colorShift 15s ease-in-out infinite;
+  padding: 2rem 0;
+}
+.profile-edit-card {
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px 0 rgba(67,233,123,0.15);
+  padding: 3rem 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.profile-edit-card:hover {
+  box-shadow: 0 25px 80px 0 rgba(67,233,123,0.25);
+  transform: translateY(-5px);
+}
+.profile-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(120deg, #fa8bff 0%, #43e97b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1976d2;
+  border-bottom: 2px solid #43e97b;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.profile-edit-btn, .btn-gradient {
+  background: linear-gradient(120deg, #fa8bff 0%, #43e97b 100%);
+  color: #fff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 20px 0 rgba(67,233,123,0.2);
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 200px;
+}
+.profile-edit-btn:hover, .btn-gradient:hover {
+  filter: brightness(1.1) saturate(1.2);
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px 0 rgba(67,233,123,0.3);
+}
+.form-label {
+  font-weight: 600;
+  color: #1976d2;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.form-control, .form-select {
+  border-radius: 15px !important;
+  font-size: 1.1rem;
+  padding: 1rem 1.2rem;
+  border: 2px solid #e0e0e0;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #43e97b;
+  box-shadow: 0 0 0 0.2rem rgba(67,233,123,0.25);
+  transform: translateY(-2px);
+}
+.password-info {
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.password-info p {
+  color: #fff;
+  margin: 0;
+  font-size: 0.9rem;
+}
+.profile-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+} 

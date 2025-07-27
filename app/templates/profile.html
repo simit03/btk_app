@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Profilim{% endblock %}
+
+{% block head_extra_styles %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mt-4">
+            <h2 class="profile-title">👤 Profilim</h2>
+            <!-- Buton grubu kaldırıldı -->
+            <p class="profile-subtitle">Kişisel Bilgiler</p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-7 offset-md-1 col-12">
+            <div class="profile-card">
+                <div class="profile-row"><span>Ad:</span> <strong>{{ session.get('first_name', '-') }}</strong></div>
+                <div class="profile-row"><span>Soyad:</span> <strong>{{ session.get('last_name', '-') }}</strong></div>
+                <div class="profile-row"><span>Kullanıcı Adı:</span> <strong>{{ session.get('username', '-') }}</strong></div>
+                <div class="profile-row"><span>Sınıf:</span> <strong>{{ session.get('grade', '-') }}</strong></div>
+                <!-- Bilgilerimi Düzenle butonu kaldırıldı -->
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 text-center">
+            <div class="row">
+                <div class="col-md-3 col-12 d-flex justify-content-center mb-2 mb-md-0">
+                    <a href="{{ url_for('pages.stats') }}" class="btn btn-primary profile-btn w-100">İstatistiklerim</a>
+                </div>
+                <div class="col-md-3 col-12 d-flex justify-content-center mb-2 mb-md-0">
+                    <a href="{{ url_for('pages.wrong_questions') }}" class="btn btn-danger profile-btn w-100">Yanlış Yaptığım Sorular</a>
+                </div>
+                <div class="col-md-3 col-12 d-flex justify-content-center mb-2 mb-md-0">
+                    <a href="{{ url_for('pages.quiz') }}" class="btn btn-success profile-btn w-100">Quiz Bölümü</a>
+                </div>
+                <div class="col-md-3 col-12 d-flex justify-content-center">
+                    <a href="{{ url_for('pages.profile_edit') }}" id="profile-edit-btn" class="btn btn-info profile-btn w-100">Bilgilerimi Düzenle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Düzenleme Modalı kaldırıldı -->
+{% endblock %}
+
+{% block body_extra_scripts %}
+    <script src="/static/js/profile.js"></script>
+{% endblock %}

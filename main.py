@@ -1,8 +1,11 @@
 from flask import Flask, render_template
 from config import Config
 from app.database.db_connection import DatabaseConnection
-from app.database.db_migrations import Migrations
+from app.database.db_migrations import create_students_table
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def create_app(config_class=Config):
     """Create and configure the Flask application."""
@@ -13,6 +16,8 @@ def create_app(config_class=Config):
                static_folder=static_dir,
                static_url_path='/static')
     app.config.from_object(config_class)
+    app.secret_key = os.getenv("SECRET_KEY")
+    print("Flask başlatıldı, secret_key:", repr(app.secret_key))
     
     # Ensure the instance folder exists
     try:
@@ -27,8 +32,7 @@ def create_app(config_class=Config):
         db_connection = DatabaseConnection()
         
         # Run database migrations
-        migrations = Migrations(db_connection)
-        migrations.run_migrations()
+        create_students_table()
         
         # Store the database connection in the app context
         app.config['DB_CONNECTION'] = db_connection

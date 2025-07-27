@@ -1,0 +1,40 @@
+/* Navbar ve Footer için animasyonlu arka plan */
+header.navbar.animated-bg,
+footer.footer.animated-bg {
+  animation: colorShift 15s ease-in-out infinite !important;
+  background-color: #667eea !important;
+  background: #667eea !important;
+  transition: background-color 1s ease-in-out !important;
+}
+
+/* Animasyon keyframes */
+@keyframes colorShift {
+  0% {
+    background-color: #667eea !important;
+    background: #667eea !important;
+  }
+  16.66% {
+    background-color: #f093fb !important;
+    background: #f093fb !important;
+  }
+  33.33% {
+    background-color: #4facfe !important;
+    background: #4facfe !important;
+  }
+  50% {
+    background-color: #43e97b !important;
+    background: #43e97b !important;
+  }
+  66.66% {
+    background-color: #38f9d7 !important;
+    background: #38f9d7 !important;
+  }
+  83.33% {
+    background-color: #764ba2 !important;
+    background: #764ba2 !important;
+  }
+  100% {
+    background-color: #667eea !important;
+    background: #667eea !important;
+  }
+} 

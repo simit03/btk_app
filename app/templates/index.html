@@ -1,39 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}Ana Sayfa - Proje Adı{% endblock %}
+{% block title %}AI Matematik - Ana Sayfa{% endblock %}
 
 {% block head_extra_styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="/static/css/index.css">
 {% endblock %}
 
-
 {% block content %}
-<!--Content-->
 <div class="hero-section">
-    <div class="hero-content">
-        <h1 class="hero-title">Modern Web'e Hoş Geldiniz</h1>
-        <p class="hero-subtitle">Bu, base.css ve şablon miras alma kullanılarak oluşturulmuş temiz ve modüler bir başlangıç sayfasıdır.</p>
-        <a href="#" class="hero-button">Daha Fazla Bilgi</a>
-    </div>
-</div>
-
-<div class="features-section">
-    <h2 class="section-title">Özellikler</h2>
-    <div class="features-grid">
-        <div class="feature-card">
-            <h3>Modüler CSS</h3>
-            <p>Stiller, base, bileşen ve sayfa bazında ayrılarak yönetimi kolaylaştırır.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Açık & Koyu Tema</h3>
-            <p>Tek bir CSS değişkeni seti ile işletim sistemi tercihine duyarlı temalar.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Flask Uyumlu</h3>
-            <p>Jinja2 şablon motoru ile kolayca entegre edilebilir ve genişletilebilir yapı.</p>
+    <div class="hero-content text-center">
+        <h1 class="hero-title">AI ile Matematik Eğlencesi!</h1>
+        <p class="hero-subtitle">İlkokul 1, 2, 3 ve 4. sınıf öğrencileri için yapay zeka destekli, eğlenceli ve öğretici matematik soruları seni bekliyor!</p>
+        <p class="hero-desc">Bu web sitesi, matematiği oyunlaştırarak öğrenmeni sağlar. Soruları çöz, e-kalemle çiz, yanlışlarını anında gör ve yapay zekadan ipucu al! Hemen giriş yap veya kayıt ol, matematik yolculuğuna başla!</p>
+        <div class="hero-buttons mt-4">
+            <a href="/login" class="btn btn-success btn-lg mr-3">Giriş Yap</a>
+            <a href="/register" class="btn btn-primary btn-lg">Kayıt Ol</a>
         </div>
     </div>
 </div>
-<!--End Content-->
 {% endblock %}
 

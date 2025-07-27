@@ -19,39 +19,115 @@
     <!---Components-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/footer.css') }}">
+    <style>
+        @keyframes colorShift {
+            0% { background-color: #667eea; }
+            16.66% { background-color: #f093fb; }
+            33.33% { background-color: #4facfe; }
+            50% { background-color: #43e97b; }
+            66.66% { background-color: #38f9d7; }
+            83.33% { background-color: #764ba2; }
+            100% { background-color: #667eea; }
+        }
+        
+        body {
+            min-height: 100vh;
+        }
+        .navbar.animated-bg {
+            animation: colorShift 15s ease-in-out infinite !important;
+            background-color: #667eea !important;
+            box-shadow: 0 2px 12px rgba(66,230,149,0.10);
+            padding: 0.7rem 0;
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff !important;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav .nav-link, .navbar-nav .nav-button {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff !important;
+            margin-right: 18px;
+            border-radius: 10px;
+            padding: 8px 22px;
+            background: linear-gradient(135deg, #fa8bff 0%, #2bd2ff 100%);
+            box-shadow: 0 2px 8px rgba(250,139,255,0.10);
+            transition: background 0.2s, transform 0.15s;
+            border: none;
+            display: inline-block;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-button:hover {
+            background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+            color: #fff !important;
+            transform: scale(1.07);
+        }
+        .main-content {
+            min-height: 70vh;
+        }
+        .footer.animated-bg {
+            animation: colorShift 15s ease-in-out infinite !important;
+            background-color: #667eea !important;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 18px 0 10px 0;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            box-shadow: 0 -2px 12px rgba(66,230,149,0.10);
+            margin-top: 40px;
+        }
+        .footer::before {
+            content: '🎲 ';
+            font-size: 1.3rem;
+        }
+    </style>
     <!---Extra Styles-->
     {% block head_extra_styles %}{% endblock %}
 </head>
 <body>
 
-    <!--Navbar-->
-    <header class="navbar">
-        <div class="navbar-container">
-            <a href="/" class="navbar-brand">MarkaLogosu</a>
-            <nav class="navbar-nav">
-                <a href="/" class="nav-link active">Ana Sayfa</a>
-                <a href="/login" class="nav-button">Giriş Yap</a>
-            </nav>
-        </div>
-    </header>
-    <!--Main Content-->
-    <main class="main-content">
-        {% block content %}{% endblock %}
-    </main>
+     <!--Navbar-->
+     <header class="navbar animated-bg">
+         <div class="navbar-container">
+             <a href="{% if session.get('logged_in') %}{{ url_for('pages.profile') }}{% else %}{{ url_for('pages.index') }}{% endif %}" class="navbar-brand">
+                 <img src="/static/img/logo.png" alt="Marka Logosu" height="40" style="vertical-align:middle;">
+             </a>
+             <nav class="navbar-nav">
+                 {% if not session.get('logged_in') %}
+                     <a href="/register" class="nav-link">Kayıt Ol</a>
+                 {% endif %}
+                 {% if session.get('logged_in') %}
+                     <a href="{{ url_for('pages.profile') }}" class="nav-button">Profil</a>
+                     <a href="{{ url_for('pages.logout') }}" class="nav-button">Çıkış Yap</a>
+                 {% else %}
+                     <a href="{{ url_for('pages.login') }}" class="nav-button">Giriş Yap</a>
+                 {% endif %}
+             </nav>
+         </div>
+     </header>
+     <!--Main Content-->
+     <main class="main-content">
+         {% block content %}{% endblock %}
+     </main>
 
-    <!--Footer-->
-    <footer class="footer">
-        <div class="footer-container">
-            <p>&copy; 2024 Proje Adı. Tüm hakları saklıdır.</p>
-        </div>
-    </footer>
+     <!--Footer-->
+     <footer class="footer animated-bg">
+         <div class="footer-container">
+             <p>&copy; 2024 Proje Adı. Tüm hakları saklıdır.</p>
+         </div>
+     </footer>
 
-    <!--Scripts-->
-    <!---Plugins-->
-    <script src="{{ url_for('static', filename='js/plugins/gsap-core.js') }}"></script>
-    <!---Main-->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <!---Components-->
-    {% block body_extra_scripts %}{% endblock %}
+     <!--Scripts-->
+     <!---Plugins-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+     <!---Main-->
+     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+     <!---Components-->
+     {% block body_extra_scripts %}{% endblock %}
 </body>
 </html>
